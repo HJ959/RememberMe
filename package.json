@@ -1,0 +1,28 @@
+{
+  "name": "Remember Me",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "clean": "rm -R dist/* && rm -R dev/* && mkdirp -p dist/media && mkdirp -p dev/media",
+    "env": "env",
+    "start": "webpack serve --open --host 0.0.0.0 --config webpack.dev.config.js",
+    "build-prod": "mkdirp -p dist/media && cp -r src/media/* dist/media && webpack --config webpack.prod.config.js",
+    "build-dev": "mkdirp -p dev/media && cp -r src/media/* dev/media && dev/ && webpack --config webpack.dev.config.js --watch",
+    "build-all": "npm run clean && npm run build-prod && npm run build-dev"
+  },
+  "dependencies": {
+    "@babel/core": "^7.20.12",
+    "babel-loader": "^9.1.2"
+  },
+  "devDependencies": {
+    "@babel/preset-env": "^7.20.2",
+    "css-loader": "^6.7.1",
+    "html-webpack-plugin": "^5.5.0",
+    "mkdirp": "^1.0.4",
+    "style-loader": "^3.3.1",
+    "webpack": "^5.73.0",
+    "webpack-cli": "^4.9.2",
+    "webpack-dev-server": "^4.7.4"
+  }
+}
