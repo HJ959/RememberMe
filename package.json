@@ -4,11 +4,10 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "clean": "rm -R dist/* && rm -R dev/* && mkdirp -p dist/media && mkdirp -p dev/media",
     "env": "env",
     "start": "webpack serve --open --host 0.0.0.0 --config webpack.dev.config.js",
-    "build-prod": "mkdirp -p dist/media && cp -r src/media/* dist/media && webpack --config webpack.prod.config.js",
-    "build-dev": "mkdirp -p dev/media && cp -r src/media/* dev/media && dev/ && webpack --config webpack.dev.config.js --watch",
+    "build-prod": "webpack --config webpack.prod.config.js",
+    "build-dev": "dev/ && webpack --config webpack.dev.config.js --watch",
     "build-all": "npm run clean && npm run build-prod && npm run build-dev"
   },
   "dependencies": {
