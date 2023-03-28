@@ -9,12 +9,14 @@ const output = document.getElementById('output')
 if (!("NDEFReader" in window))
 
   scanButton.addEventListener("click", async () => {
+    console.log('scan button pressed')
     try {
       const ndef = new NDEFReader();
       await ndef.scan();
+      console.log('scanning')
 
       ndef.addEventListener("readingerror", () => {
-        output.innerHTML = "Argh! Cannot read data from the NFC tag. Try another one?"
+        console.log("Argh! Cannot read data from the NFC tag. Try another one?")
       });
 
       ndef.addEventListener("reading", ({
@@ -23,10 +25,10 @@ if (!("NDEFReader" in window))
       }) => {
         output.innerHTML = `> Serial Number: ${serialNumber}`
         console.log(serialNumber)
-        // output.innerHTML = `> Records: (${message.records.length})`
+        console.log(`> Records: (${message.records.length})`)
       });
     } catch (error) {
-      output.innerHTML = "Argh! " + error
+      console.log("Argh! " + error)
     }
   });
 
