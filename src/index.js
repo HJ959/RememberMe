@@ -12,7 +12,6 @@ if (!("NDEFReader" in window))
     try {
       const ndef = new NDEFReader();
       await ndef.scan();
-      output.innerHTML = "> Scan started"
 
       ndef.addEventListener("readingerror", () => {
         output.innerHTML = "Argh! Cannot read data from the NFC tag. Try another one?"
@@ -31,17 +30,17 @@ if (!("NDEFReader" in window))
     }
   });
 
-// writeButton.addEventListener("click", async () => {
-//   output.innerHTML = "User clicked write button"
+writeButton.addEventListener("click", async () => {
+  output.innerHTML = "User clicked write button"
 
-//   try {
-//     const ndef = new NDEFReader();
-//     await ndef.write("Hello world!");
-//     output.innerHTML = "> Message written"
-//   } catch (error) {
-//     output.innerHTML = "Argh! " + error
-//   }
-// });
+  try {
+    const ndef = new NDEFReader();
+    await ndef.write("SOME STRINGGGGGG");
+    output.innerHTML = "> Message written"
+  } catch (error) {
+    output.innerHTML = "Argh! " + error
+  }
+});
 
 // makeReadOnlyButton.addEventListener("click", async () => {
 //   output.innerHTML = "User clicked make read-only button"
