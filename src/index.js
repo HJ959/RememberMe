@@ -8,29 +8,28 @@ const output = document.getElementById('output')
 // if you can use the NDEFReader
 if (!("NDEFReader" in window))
 
-  scanButton.addEventListener("click", async () => {
-    console.log('scan button pressed')
-    try {
-      const ndef = new NDEFReader();
-      await ndef.scan();
-      console.log('scanning')
+scanButton.addEventListener("click", async () => {
+  console.log("User clicked scan button")
 
-      ndef.addEventListener("readingerror", () => {
-        console.log("Argh! Cannot read data from the NFC tag. Try another one?")
-      });
+  try {
+    const ndef = new NDEFReader();
+    await ndef.scan();
+    console.log("> Scan started");
 
-      ndef.addEventListener("reading", ({
-        message,
-        serialNumber
-      }) => {
-        output.innerHTML = `> Serial Number: ${serialNumber}`
-        console.log(serialNumber)
-        console.log(`> Records: (${message.records.length})`)
-      });
-    } catch (error) {
-      console.log("Argh! " + error)
-    }
-  });
+    ndef.addEventListener("readingerror", () => {
+      console.log("Argh! Cannot read data from the NFC tag. Try another one?");
+    });
+
+    ndef.addEventListener("reading", ({ message, serialNumber }) => {
+      console.log(`> Serial Number: ${serialNumber}`);
+      output.innerHTML = `${serialNumber}`
+      console.log(`> Records: (${message.records.length})`);
+    });
+  } catch (error) {
+    console.log("Argh! " + error);
+  }
+});
+
 
 writeButton.addEventListener("click", async () => {
   output.innerHTML = "User clicked write button"
