@@ -1,4 +1,8 @@
-log = ChromeSamples.log;
+import './index.css'
+
+const scanButton = document.getElementById('scanButton')
+const writeButton = document.getElementById('writeButton')
+const makeReadOnlyButton = document.getElementById('makeReadOnlyButton')
 
 if (!("NDEFReader" in window))
   ChromeSamples.setStatus("Web NFC is not available. Use Chrome on Android.");
