@@ -3,6 +3,9 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 
 module.exports = {
   mode: 'production',
+  experiments: {
+    topLevelAwait: true,
+  },
 
   entry: {
     index: "./src/index.js"
@@ -27,9 +30,14 @@ module.exports = {
         use: ["style-loader", "css-loader"],
       },
       {
-        test: /\.(js)$/,
+        test: /\.(js|mjs|jsx|ts|tsx)$/,
         exclude: /node_modules/,
-        use: ['babel-loader']
+        use: {
+          loader: 'babel-loader',
+          options: {
+            plugins: ['@babel/plugin-syntax-top-level-await'],
+          }
+        }
       },
       {
         test: /\.(png|svg|jpg|jpeg|gif)$/i,
