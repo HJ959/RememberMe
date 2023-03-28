@@ -5,9 +5,6 @@ const writeButton = document.getElementById('writeButton')
 const makeReadOnlyButton = document.getElementById('makeReadOnlyButton')
 const output = document.getElementById('output')
 
-// if you can use the NDEFReader
-if (!("NDEFReader" in window))
-
 scanButton.addEventListener("click", async () => {
   console.log("User clicked scan button")
 
@@ -20,7 +17,10 @@ scanButton.addEventListener("click", async () => {
       console.log("Argh! Cannot read data from the NFC tag. Try another one?");
     });
 
-    ndef.addEventListener("reading", ({ message, serialNumber }) => {
+    ndef.addEventListener("reading", ({
+      message,
+      serialNumber
+    }) => {
       console.log(`> Serial Number: ${serialNumber}`);
       output.innerHTML = `${serialNumber}`
       console.log(`> Records: (${message.records.length})`);
