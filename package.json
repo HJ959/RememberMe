@@ -6,7 +6,7 @@
   "scripts": {
     "env": "env",
     "start": "webpack serve --open --host 0.0.0.0 --config webpack.dev.config.js",
-    "build-prod": "webpack --config webpack.prod.config.js",
+    "build-prod": "webpack --config webpack.prod.config.js && cp -r netlify dist/netlify",
     "build-dev": "webpack --config webpack.dev.config.js --watch",
     "build-all": "npm run clean && npm run build-prod && npm run build-dev"
   },
