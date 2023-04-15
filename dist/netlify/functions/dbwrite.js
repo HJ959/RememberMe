@@ -1,9 +1,8 @@
 const admin = require('firebase-admin')
-const serviceAccount = env.process.authJson
 
 // Initialise the admin with the credentials
 admin.initializeApp({
-  credential: admin.credential.cert(serviceAccount),
+  credential: admin.credential.cert(env.process.authJson),
   databaseURL: 'https://rememberme-database.firebaseapp.com'
 })
 
