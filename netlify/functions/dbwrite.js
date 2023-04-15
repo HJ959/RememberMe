@@ -1,5 +1,5 @@
 const admin = require('firebase-admin')
-const serviceAccount = require('./serviceAccountKey.json') // Update this to your file
+const serviceAccount = env.process.authJson
 
 // Initialise the admin with the credentials
 admin.initializeApp({
