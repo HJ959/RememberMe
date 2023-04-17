@@ -6,6 +6,9 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+</head>
+
+<body>
     <div class="container center">
         <button id="scanButton">Scan</button>
         <button id="writeButton">Write</button>
@@ -13,10 +16,15 @@
         <h3>Live Output</h3>
         <div id="output" class="output">
         </div>
+        <!-- Draw the action buttons -->
+        <button id="start-btn">Start recording</button>
+        <button id="stop-btn" disabled>Stop recording</button>
+    
+        <!-- List item to store the recording files so they can be played in the browser -->
+        <h2>Stored Recordings</h2>
+        <ul id="recordingslist"></ul>
     </div>
-</head>
-
-<body>
+    
 </body>
 
 </html>
