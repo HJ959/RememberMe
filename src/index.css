@@ -1,35 +1,41 @@
-html, body {
+html,
+body {
     width: 100%;
     height: 100%;
     background: black;
-    color: greenyellow;
+    color: whitesmoke;
 }
 
 
 .container {
     height: 70vh;
     width: 80vw;
+    border-style: solid;
+    padding: 10px;
 }
 
 button {
     width: 100%;
-    height: 1%;
-    padding: 5%;
-    background-color: greenyellow;
+    height: 10%;
+    background-color: whitesmoke;
 
 }
 
 .center {
     margin: auto;
-    border: 6px solid greenyellow;
-    padding: 5%;
-  }
+    padding-bottom: 1%;
+}
 
-  ul {
+ul {
     list-style: none;
 }
 
 #recordingslist audio {
     display: block;
     margin-bottom: 10px;
+}
+
+audio, input {
+    width: 100%;
+    padding-bottom: 5%;
 }

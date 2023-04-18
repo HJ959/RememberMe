@@ -10,21 +10,19 @@
 
 <body>
     <div class="container center">
+        <h3>Press scan and scan a NFC card</h3>
         <button id="scanButton">Scan</button>
-        <button id="writeButton">Write</button>
         <!-- <button id="makeReadOnlyButton">Make Read-Only</button>  -->
-        <h3>Live Output</h3>
+        <h3>This is the NFC serial number</h3>
         <div id="output" class="output">
         </div>
-        <!-- Draw the action buttons -->
-        <button id="start-btn">Start recording</button>
-        <button id="stop-btn" disabled>Stop recording</button>
-    
-        <!-- List item to store the recording files so they can be played in the browser -->
-        <h2>Stored Recordings</h2>
-        <ul id="recordingslist"></ul>
+        <h3>Please select or record an audio clip</h3>
+        <input type="file" accept="audio/*" capture id="recorder" />
+        <audio id="player" controls></audio>
+        <h3>Please upload the audio clip to the Forget Me Not Box</h3>
+        <button id="uploadButton">Upload</button>
     </div>
-    
+
 </body>
 
 </html>

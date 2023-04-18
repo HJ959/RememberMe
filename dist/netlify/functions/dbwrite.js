@@ -9,11 +9,16 @@ admin.initializeApp({
 // Set up an instance of the DB
 const db = admin.firestore()
 
+var bucket = admin.storage().bucket();
+
+
+
 // exports.handler is required by netlify to process.
 exports.handler = async (event, context, callback) => {
+  bucket.upload(event.body)
   // wait for the record to be added
   await db.collection('COLLECTION').add({
-    name: 'Test'
+    name: 'Test',
   })
 
   // Return a callback witha 200 response and a message.
