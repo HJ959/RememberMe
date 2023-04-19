@@ -39,3 +39,8 @@ audio, input {
     width: 100%;
     padding-bottom: 5%;
 }
+
+output {
+    padding-top: 10px;
+    padding-bottom: 10px;
+}
