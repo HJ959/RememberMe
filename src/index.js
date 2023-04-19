@@ -45,15 +45,15 @@ recorder.addEventListener('change', function (e) {
 const uploadButton = document.getElementById('uploadButton');
 
 recorder.addEventListener('change', function (e) {
-  uploadAudio(file)
+  uploadFile(file)
 });
 
-
-// Function using fetch to POST to our API endpoint
-async function uploadAudio(data) {
-  const response = await fetch('https://remembermebox.netlify.app/.netlify/functions/dbwrite', {
-    body: JSON.stringify(data),
-    method: 'POST'
-  });
-  return await response.json();
-}
+async function uploadFile() {
+    let formData = new FormData();
+    formData.append("fileupload", fileupload.files[0]);
+    await fetch('https://remembermebox.netlify.app/.netlify/functions/dbwrite', {
+      method: "POST",
+      body: formData
+    });
+    return await response.json();
+  }

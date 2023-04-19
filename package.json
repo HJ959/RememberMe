@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "env": "env",
-    "start": "webpack serve --open --host 0.0.0.0 --config webpack.dev.config.js",
+    "start": "webpack serve --open --host 0.0.0.0 --port 8888 --config webpack.dev.config.js",
     "build-prod": "rm -R dist && webpack --config webpack.prod.config.js && cp -r netlify dist/netlify && cp src/package.json dist/package.json",
     "build-dev": "webpack --config webpack.dev.config.js --watch",
     "build-all": "npm run clean && npm run build-prod && npm run build-dev"
@@ -24,6 +24,7 @@
     "webpack-dev-server": "^4.7.4"
   },
   "dependencies": {
-    "firebase-admin": "^11.6.0"
-}
+    "firebase-admin": "^11.6.0",
+    "node-fetch": "^2.6.9"
+  }
 }
