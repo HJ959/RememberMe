@@ -52,8 +52,9 @@ recorder.addEventListener('change', function (e) {
 });
 
 async function uploadFile(fileToUpload) {
-    await fetch('https://remembermebox.netlify.app/.netlify/functions/dbwrite', {
+    const response = await fetch('https://remembermebox.netlify.app/.netlify/functions/dbwrite', {
       method: "POST",
       body: fileToUpload
     })
+    return await alert(response.json())
   }
