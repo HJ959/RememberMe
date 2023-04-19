@@ -32,12 +32,13 @@ scanButton.addEventListener("click", async () => {
 
 const recorder = document.getElementById('recorder');
 const player = document.getElementById('player');
-let file;
+let file, new_file;
 
 recorder.addEventListener('change', function (e) {
   file = e.target.files[0];
-  console.log(file)
-  const url = URL.createObjectURL(file);
+  new_file = new File([file], `${serialNumber}.m4a`);
+  console.log(new_file)
+  const url = URL.createObjectURL(new_file);
   // Do something with the audio file.
   player.src = url;
 });
@@ -45,13 +46,13 @@ recorder.addEventListener('change', function (e) {
 const uploadButton = document.getElementById('uploadButton');
 
 recorder.addEventListener('change', function (e) {
-  uploadFile(file)
+  uploadFile(new_file)
 });
 
-async function uploadFile() {
+async function uploadFile(fileToUpload) {
     await fetch('https://remembermebox.netlify.app/.netlify/functions/dbwrite', {
       method: "POST",
-      body: file
+      body: fileToUpload
     });
     return await response.json();
   }
