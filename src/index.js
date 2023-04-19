@@ -4,6 +4,7 @@ import './index.css'
 
 const scanButton = document.getElementById('scanButton')
 const output = document.getElementById('output')
+const outputUpload = document.getElementById('outputUpload')
 let serialNumberForFile, serialNumber
 
 scanButton.addEventListener("click", async () => {
@@ -60,5 +61,13 @@ async function uploadFile(fileToUpload) {
     method: "POST",
     body: fileToUpload
   })
-  return await console.log(response)
+  return await handleResponseUpload(response)
+}
+
+function handleResponseUpload(response) {
+  if (response.status === 200) {
+    outputUpload.innerHTML = 'Success! File upload!'
+  } else {
+    outputUpload.innerHTML = `Failed with code: ${response.status}`
+  }
 }
