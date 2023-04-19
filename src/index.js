@@ -49,11 +49,9 @@ recorder.addEventListener('change', function (e) {
 });
 
 async function uploadFile() {
-    let formData = new FormData();
-    formData.append("fileupload", fileupload.files[0]);
     await fetch('https://remembermebox.netlify.app/.netlify/functions/dbwrite', {
       method: "POST",
-      body: formData
+      body: file
     });
     return await response.json();
   }
