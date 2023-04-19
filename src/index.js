@@ -47,14 +47,18 @@ recorder.addEventListener('change', function (e) {
 
 const uploadButton = document.getElementById('uploadButton');
 
-recorder.addEventListener('change', function (e) {
-  uploadFile(new_file)
-});
+uploadButton.addEventListener("click", async () => {
+  try {
+    uploadFile(new_file)
+  } catch (error) {
+    console.log("Argh! " + error);
+  }
+})
 
 async function uploadFile(fileToUpload) {
-    const response = await fetch('https://remembermebox.netlify.app/.netlify/functions/dbwrite', {
-      method: "POST",
-      body: fileToUpload
-    })
-    return await alert(response.json())
-  }
+  const response = await fetch('https://remembermebox.netlify.app/.netlify/functions/dbwrite', {
+    method: "POST",
+    body: fileToUpload
+  })
+  return await console.log(response)
+}
