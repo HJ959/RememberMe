@@ -9,9 +9,6 @@ admin.initializeApp({
 // Set up an instance of the DB
 const db = admin.firestore()
 
-// Get the Firestore service for the default app
-const defaultFirestore = admin.getFirestore();
-
 // exports.handler is required by netlify to process.
 exports.handler = async (event, context, callback) => {
   // wait for the record to be added
