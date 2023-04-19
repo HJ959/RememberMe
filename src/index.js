@@ -4,6 +4,7 @@ import './index.css'
 
 const scanButton = document.getElementById('scanButton')
 const output = document.getElementById('output')
+let serialNumberForFile
 
 scanButton.addEventListener("click", async () => {
   console.log("User clicked scan button")
@@ -21,6 +22,7 @@ scanButton.addEventListener("click", async () => {
       message,
       serialNumber
     }) => {
+      serialNumberForFile = serialNumber
       console.log(`> Serial Number: ${serialNumber}`);
       output.innerHTML = `${serialNumber}`
       console.log(`> Records: (${message.records.length})`);
