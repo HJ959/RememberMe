@@ -38,7 +38,7 @@ let file, new_file;
 
 recorder.addEventListener('change', function (e) {
   file = e.target.files[0];
-  new_file = new File([file], `${serialNumber}.m4a`);
+  new_file = new File([file], `${serialNumberForFile}.m4a`);
   console.log(new_file)
   const url = URL.createObjectURL(new_file);
   // Do something with the audio file.
@@ -55,6 +55,5 @@ async function uploadFile(fileToUpload) {
     await fetch('https://remembermebox.netlify.app/.netlify/functions/dbwrite', {
       method: "POST",
       body: fileToUpload
-    });
-    return await response.json();
+    })
   }
