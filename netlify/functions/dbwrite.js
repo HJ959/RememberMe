@@ -24,3 +24,34 @@ exports.handler = async (event, context, callback) => {
     })
   })
 }
+
+const firebaseConfig = {
+  apiKey: process.env.DB_API_KEY,
+  authDomain: "rememberme-database.firebaseapp.com",
+  projectId: "rememberme-database",
+  storageBucket: "rememberme-database.appspot.com",
+  messagingSenderId: "773885761161",
+  appId: "1:773885761161:web:592197f93d6b8a9c179858",
+  measurementId: "G-C04M7527LF"
+};
+
+function uploadAudio(){
+  const ref = firebase.storage().ref()
+
+  const file = document.querySelector("#photo").files[0]
+
+  const name = new Date() + '-' + file.name
+
+  const metadata = {
+    contentType:file.type
+  }
+
+  const task = ref.child(name).put(file,metadata)
+
+  task.then(snapshot => snapshot.ref.getDownloadURL())
+  .then(url => {
+    console.log(url)
+    alert("Image Upload Successful")
+    const imageElement = document.createElement('image')
+  })
+}
