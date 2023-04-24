@@ -1,14 +1,21 @@
+@font-face {
+    font-family: MyWebFont;
+    src: url('Matchbook.ttf')
+}
+
 html,
 body {
     width: 100%;
     height: 100%;
     background: black;
     color: whitesmoke;
+    font-family: MyWebFont;
+    font-size: 1.3em;
 }
 
 
 .container {
-    height: 70vh;
+    height: 85vh;
     width: 80vw;
     border-style: solid;
     padding: 10px;
