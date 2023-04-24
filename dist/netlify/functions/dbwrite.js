@@ -24,9 +24,12 @@ const firebaseConfig = {
   measurementId: "G-C04M7527LF"
 };
 
+const app = initializeApp(firebaseConfig);
+const db = getFirestore(app);
+
 exports.handler = async event => {
   const payload = JSON.parse(event.body)
-  return uploadString(ref(getStorage(initializeApp(firebaseConfig)), payload.name), payload.file.split(',')[1], 'base64').then(file => {
+  return uploadString(ref(getStorage(db), payload.name), payload.file.split(',')[1], 'base64').then(file => {
     return getDownloadURL(file.ref).then(url => {
       return {
         body: JSON.stringify({
