@@ -19,8 +19,7 @@ const app = initializeApp(firebaseConfig);
 // Initialize Cloud Storage and get a reference to the service
 const storage = getStorage(app);
 
-
-
 exports.handler = async event => {
   console.log(event.body)
+  return 200;
 }
