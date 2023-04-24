@@ -16,6 +16,22 @@ exports.handler = async (event, context, callback) => {
     name: event.body,
   })
 
+  const audio = event.body;
+
+  const bucket = admin.storage().bucket('rememberme-database.appspot.com');
+  const file = bucket.file('audio/myFile.jpg');
+
+  // var imgBuffer = new Buffer.from(imgData, 'base64')
+
+  // await file.save(imgBuffer, {
+  //   contentType: 'image/jpeg'
+  // }).catch(err => {
+  //   console.error("Upload bad!", err);
+  //   response.send('0');
+  // });
+
+  // response.send('1');
+
   // Return a callback witha 200 response and a message.
   return callback(null, {
     statusCode: 200,
@@ -35,7 +51,7 @@ const firebaseConfig = {
   measurementId: "G-C04M7527LF"
 };
 
-function uploadAudio(){
+function uploadAudio() {
   const ref = firebase.storage().ref()
 
   const file = document.querySelector("#photo").files[0]
@@ -43,15 +59,15 @@ function uploadAudio(){
   const name = new Date() + '-' + file.name
 
   const metadata = {
-    contentType:file.type
+    contentType: file.type
   }
 
-  const task = ref.child(name).put(file,metadata)
+  const task = ref.child(name).put(file, metadata)
 
   task.then(snapshot => snapshot.ref.getDownloadURL())
-  .then(url => {
-    console.log(url)
-    alert("Image Upload Successful")
-    const imageElement = document.createElement('image')
-  })
+    .then(url => {
+      console.log(url)
+      alert("Image Upload Successful")
+      const imageElement = document.createElement('image')
+    })
 }

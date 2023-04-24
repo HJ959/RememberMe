@@ -35,13 +35,13 @@ scanButton.addEventListener("click", async () => {
 
 const recorder = document.getElementById('recorder');
 const player = document.getElementById('player');
-let file, new_file;
+let file, new_file, url;
 
 recorder.addEventListener('change', function (e) {
   file = e.target.files[0];
   new_file = new File([file], `${serialNumberForFile}.m4a`);
   console.log(new_file)
-  const url = URL.createObjectURL(new_file);
+  url = URL.createObjectURL(file);
   // Do something with the audio file.
   player.src = url;
 });
