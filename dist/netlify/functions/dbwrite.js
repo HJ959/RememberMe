@@ -22,6 +22,5 @@ const storage = getStorage(app);
 
 
 exports.handler = async event => {
-  const payload = JSON.parse(event.body)
   console.log(event.body)
 }
