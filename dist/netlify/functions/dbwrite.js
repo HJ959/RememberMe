@@ -18,7 +18,7 @@ import {
 // Set up an instance of the DB
 // const db = admin.firestore()
 exports.handler = async event => {
-  const payload = JSON.parse(event.body)
+  const payload = event.body
   return uploadString(ref(getStorage(initializeApp(
     {
         apiKey: process.env.DB_API_KEY,
