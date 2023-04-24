@@ -1,19 +1,8 @@
-import {
-  initializeApp
-} from 'firebase/app'
-import {
-  getDownloadURL,
-  getStorage,
-  ref,
-  uploadString
-} from 'firebase/storage'
+import { initializeApp } from "firebase/app";
+import { getStorage } from "firebase/storage";
 
-// Initialise the admin with the credentials
-// admin.initializeApp({
-//   credential: admin.credential.cert(JSON.parse(process.env.authJson)),
-//   databaseURL: 'https://rememberme-database.firebaseapp.com'
-// })
-
+// TODO: Replace the following with your app's Firebase project configuration
+// See: https://firebase.google.com/docs/web/learn-more#config-object
 const firebaseConfig = {
   apiKey: process.env.DB_API_KEY,
   authDomain: "rememberme-database.firebaseapp.com",
@@ -24,19 +13,15 @@ const firebaseConfig = {
   measurementId: "G-C04M7527LF"
 };
 
+// Initialize Firebase
 const app = initializeApp(firebaseConfig);
-const db = getFirestore(app);
+
+// Initialize Cloud Storage and get a reference to the service
+const storage = getStorage(app);
+
+
 
 exports.handler = async event => {
   const payload = JSON.parse(event.body)
-  return uploadString(ref(getStorage(db), payload.name), payload.file.split(',')[1], 'base64').then(file => {
-    return getDownloadURL(file.ref).then(url => {
-      return {
-        body: JSON.stringify({
-          url: url
-        }),
-        statusCode: 200
-      }
-    })
-  })
+  console.log(event.body)
 }
