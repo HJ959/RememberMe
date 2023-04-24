@@ -1,4 +1,4 @@
-// const admin = require('firebase-admin')
+const admin = require('firebase-admin')
 import {
   initializeApp
 } from 'firebase/app'
@@ -15,14 +15,16 @@ import {
 //   databaseURL: 'https://rememberme-database.firebaseapp.com'
 // })
 
+const authFirebase = {
+    credential: admin.credential.cert(JSON.parse(process.env.authJson)),
+    databaseURL: 'https://rememberme-database.firebaseapp.com'
+  }
+
 // Set up an instance of the DB
 // const db = admin.firestore()
 exports.handler = async event => {
   const payload = JSON.parse(event.body)
-  return uploadString(ref(getStorage(initializeApp({
-    credential: admin.credential.cert(JSON.parse(process.env.authJson)),
-    databaseURL: 'https://rememberme-database.firebaseapp.com'
-  })), payload.name), payload.file.split(',')[1], 'base64').then(file => {
+  return uploadString(ref(getStorage(initializeApp(authFirebase)), payload.name), payload.file.split(',')[1], 'base64').then(file => {
     return getDownloadURL(file.ref).then(url => {
       return {
         body: JSON.stringify({
