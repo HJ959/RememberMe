@@ -17,11 +17,12 @@ exports.handler = async (event, context, callback) => {
   })
 
   const audio = event.body;
+  console.log(audio)
 
   const bucket = admin.storage().bucket('rememberme-database.appspot.com');
   const file = bucket.file('audio/myFile.jpg');
 
-  // var imgBuffer = new Buffer.from(imgData, 'base64')
+  // var audioBuffer = new Buffer.from(file, 'base64')
 
   // await file.save(imgBuffer, {
   //   contentType: 'image/jpeg'
