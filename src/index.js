@@ -57,7 +57,7 @@ uploadButton.addEventListener("click", async () => {
 })
 
 async function uploadFile(fileToUpload) {
-  const response = await fetch('https://remembermebox.netlify.app/.netlify/functions/dbwrite', {
+  const response = await fetch('https://forgetmenotalbum.netlify.app/.netlify/functions/dbwrite', {
     method: "POST",
     body: fileToUpload
   })
