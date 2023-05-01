@@ -7,7 +7,7 @@ import {
   ref
 } from "firebase/storage";
 
-const Buffer = require('buffer/').Buffer
+const Buffer = require('buffer')
 
 // TODO: Replace the following with your app's Firebase project configuration
 // See: https://firebase.google.com/docs/web/learn-more#config-object
