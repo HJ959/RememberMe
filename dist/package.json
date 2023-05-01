@@ -1,8 +1,0 @@
-{
-    "description": "This is the package.json that lives on the node.js server on netlify",
-    "dependencies": {
-        "firebase-admin": "^11.6.0",
-        "firebase": "^9.20.0",
-        "buffer": "^6.0.3"
-    }
-}

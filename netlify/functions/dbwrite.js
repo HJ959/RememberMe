@@ -31,9 +31,9 @@ const storageRef = ref(storage, 'audio');
 
 exports.handler = async event => {
   console.log(event)
-  let audioFile = Buffer.from(event.body[0], "base64")
+  let audioFile = Buffer.from(event.body, "base64")
   console.log(audioFile)
-  console.log(event.body[1])
+  console.log(event.body)
   
   uploadBytes(storageRef, audioFile).then((snapshot) => {
     console.log('Uploaded audio file!')
