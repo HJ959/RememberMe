@@ -37,9 +37,16 @@ exports.handler = async event => {
   console.log(event.body)
   
   const storageRef = firebase.ref(storage, 'audioFile.m4a');
-  firebase.uploadBytes(storageRef, audioFile).then((snapshot) => {
-    console.log('Uploaded audio file!')
-  });
+  let metadata = {
+    contentType: 'audio/m4a'
+  }
+
+  const voiceRef = storageRef.child(`audio/test.m4a`);  
+  var blob = new Blob([audioFile], {type: 'audio/mp3'});
+  voiceRef.put(blob);
+  // firebase.uploadBytes(storageRef, audioFile).then((snapshot) => {
+  //   console.log('Uploaded audio file!')
+  // });
 
   return {
     statusCode: 200,
