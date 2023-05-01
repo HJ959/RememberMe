@@ -7,7 +7,7 @@ import {
   ref
 } from "firebase/storage";
 
-import * as Busboy from "busboy"
+import * as busboy from "busboy"
 
 // TODO: Replace the following with your app's Firebase project configuration
 // See: https://firebase.google.com/docs/web/learn-more#config-object
@@ -30,7 +30,7 @@ const storage = getStorage(app);
 const storageRef = ref(storage, 'audio');
 
 exports.handler = async event => {
-  console.log(event.body)
+  console.log(event)
 
   const fields = await parseMultipartForm(event)
 
@@ -49,11 +49,8 @@ function parseMultipartForm(event) {
     const fields = {};
 
     // let's instantiate our busboy instance!
-    const busboy = Busboy({
-      // it uses request headers
-      // to extract the form boundary value (the ----WebKitFormBoundary thing)
-      headers: event.headers
-    });
+    console.log(busboy)
+    const busboy = busboy({headers: event.headers});
 
     // before parsing anything, we need to set up some handlers.
     // whenever busboy comes across a file ...
