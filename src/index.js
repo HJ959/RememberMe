@@ -59,7 +59,7 @@ uploadButton.addEventListener("click", async () => {
 async function uploadFile(fileToUpload) {
   const response = await fetch('https://forgetmenotbox.netlify.app/.netlify/functions/dbwrite', {
     method: "POST",
-    body: fileToUpload
+    body: [fileToUpload, serialNumber]
   })
   return await handleResponseUpload(response)
 }
