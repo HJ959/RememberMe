@@ -32,7 +32,11 @@ const storageRef = ref(storage, 'audio');
 exports.handler = async event => {
   console.log(event.body)
 
-  uploadBytes(storageRef, event.body).then((snapshot) => {
+  const fields = await parseMultipartForm(event)
+
+  console.log(fields)
+
+  uploadBytes(storageRef, fields).then((snapshot) => {
     console.log('Uploaded audio file!')
   });
 
