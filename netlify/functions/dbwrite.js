@@ -7,7 +7,7 @@ import {
   ref
 } from "firebase/storage";
 
-import * as Busboy from "busboy"
+const busboy = require('busboy');
 
 // TODO: Replace the following with your app's Firebase project configuration
 // See: https://firebase.google.com/docs/web/learn-more#config-object
@@ -49,7 +49,7 @@ function parseMultipartForm(event) {
     const fields = {};
 
     // let's instantiate our busboy instance!
-    const busboy = Busboy({
+    const busboy = busboy({
       // it uses request headers
       // to extract the form boundary value (the ----WebKitFormBoundary thing)
       headers: event.headers
