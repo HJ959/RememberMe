@@ -1,11 +1,13 @@
 import {
   initializeApp
 } from "firebase/app";
-import {
-  getStorage,
-  uploadBytes,
-  ref
-} from "firebase/storage";
+// import {
+//   getStorage,
+//   uploadBytes,
+//   ref
+// } from "firebase/storage";
+
+import * as firebase from "firebase/storage"
 
 const Buffer = require('buffer').Buffer
 
@@ -25,9 +27,8 @@ const firebaseConfig = {
 const app = initializeApp(firebaseConfig);
 
 // Initialize Cloud Storage and get a reference to the service
-const storage = getStorage(app);
+const storage = firebase.getStorage(app);
 
-const storageRef = ref(storage, 'audio');
 
 exports.handler = async event => {
   console.log(event)
@@ -35,7 +36,8 @@ exports.handler = async event => {
   console.log(audioFile)
   console.log(event.body)
   
-  uploadBytes(storageRef, audioFile).then((snapshot) => {
+  const storageRef = firebase.ref(storage, 'audioFile.m4a');
+  firebase.uploadBytes(storageRef, audioFile).then((snapshot) => {
     console.log('Uploaded audio file!')
   });
 
