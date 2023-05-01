@@ -27,6 +27,7 @@ const firebaseConfig = {
 const app = initializeApp(firebaseConfig);
 
 // Initialize Cloud Storage and get a reference to the service
+// const storage = firebase.getStorage(app);
 const storage = firebase.getStorage(app);
 
 
@@ -36,12 +37,10 @@ exports.handler = async event => {
   console.log(audioFile)
   console.log(event.body)
   
-  const storageRef = firebase.ref(storage, audioFile);
+  const storageRef = storage.ref("audio/file.m4a");
   let metadata = {
     contentType: 'audio/m4a'
   }
-
-
  
   // var blob = new Blob([audioFile], {type: 'audio/mp3'});
   // storageRef.put(blob);
