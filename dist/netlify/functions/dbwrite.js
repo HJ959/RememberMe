@@ -36,16 +36,21 @@ exports.handler = async event => {
   let audioFile = Buffer.from(event.body, "base64")
   console.log(audioFile)
   console.log(event.body)
-  
+
   const storageRef = firebase.ref(storage, "audio/file.m4a");
   let metadata = {
     contentType: 'audio/m4a'
   }
- 
+
   // var blob = new Blob([audioFile], {type: 'audio/mp3'});
   // storageRef.put(blob);
-  firebase.uploadBytes(storageRef, audioFile).then((snapshot) => {
-    console.log('Uploaded audio file!')
+  // firebase.uploadBytes(storageRef, audioFile).then((snapshot) => {
+  //   console.log('Uploaded audio file!')
+  // });
+
+  // Base64 formatted string
+  firebase.uploadString(storageRef, audioFile, 'base64').then((snapshot) => {
+    console.log('Uploaded a base64 string!');
   });
 
   return {
