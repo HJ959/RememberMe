@@ -41,7 +41,7 @@ exports.handler = async event => {
     contentType: 'audio/m4a'
   }
  
-  var blob = new Blob([audioFile], {type: 'audio/mp3'});
+  var blob = new firebase.Blob([audioFile], {type: 'audio/mp3'});
   storageRef.put(blob);
   // firebase.uploadBytes(storageRef, audioFile).then((snapshot) => {
   //   console.log('Uploaded audio file!')
