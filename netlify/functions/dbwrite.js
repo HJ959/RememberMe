@@ -1,5 +1,5 @@
 import { initializeApp } from "firebase/app";
-import { getStorage } from "firebase/storage";
+import { getStorage, uploadBytes, ref } from "firebase/storage";
 
 // TODO: Replace the following with your app's Firebase project configuration
 // See: https://firebase.google.com/docs/web/learn-more#config-object
@@ -19,7 +19,15 @@ const app = initializeApp(firebaseConfig);
 // Initialize Cloud Storage and get a reference to the service
 const storage = getStorage(app);
 
+const storageRef = ref(storage, 'audio');
+
 exports.handler = async event => {
   console.log(event.body)
+
+  uploadBytes(storageRef, event.body).then((snapshot) => {
+    console.log('Uploaded audio file!')
+  });
+
   return 200;
 }
+
