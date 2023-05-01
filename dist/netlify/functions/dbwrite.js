@@ -7,7 +7,7 @@ import {
   ref
 } from "firebase/storage";
 
-import Busboy from 'busboy'
+import * as Busboy from "busboy"
 
 // TODO: Replace the following with your app's Firebase project configuration
 // See: https://firebase.google.com/docs/web/learn-more#config-object
