@@ -51,7 +51,7 @@ uploadButton.addEventListener("click", async () => {
   try {
     new_file = new File([file], `${serialNumberForFile}.m4a`);
     console.log(new_file)
-    uploadFile(new_file)
+    uploadFile(audioToBase64(new_file))
   } catch (error) {
     console.log("Argh! " + error);
   }
@@ -72,4 +72,13 @@ function handleResponseUpload(response) {
   } else {
     outputUpload.innerHTML = `Failed with code: ${response.status}`
   }
+}
+
+async function audioToBase64(audioFile) {
+  return new Promise((resolve, reject) => {
+    let reader = new FileReader();
+    reader.onerror = reject;
+    reader.onload = (e) => resolve(e.target.result);
+    reader.readAsDataURL(audioFile);
+  });
 }

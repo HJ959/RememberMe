@@ -30,9 +30,10 @@ const storage = firebaseStorage.getStorage(app);
 exports.handler = async event => {
   console.log(event)
   //let audioFile = Buffer.from(event.body, "base64")
+  console.log("Attempting to create a Blob from the base64 string")
   let audioFile = firebaseFirestore.Blob.fromBase64String(event.body)
+
   console.log(audioFile)
-  console.log(event.body)
 
   const storageRef = firebaseStorage.ref(storage, "audio");
   
