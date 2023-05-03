@@ -1,16 +1,5 @@
-import {
-  initializeApp
-} from "firebase/app";
-// import {
-//   getStorage,
-//   uploadBytes,
-//   ref
-// } from "firebase/storage";
-
-import * as firebaseStorage from "firebase/storage"
-import * as firebaseFirestore from 'firebase/firestore'
-
-const Buffer = require('buffer').Buffer
+import * as firebase from "firebase"
+// const Buffer = require('buffer').Buffer
 
 // TODO: Replace the following with your app's Firebase project configuration
 // See: https://firebase.google.com/docs/web/learn-more#config-object
@@ -25,29 +14,29 @@ const firebaseConfig = {
 };
 
 // Initialize Firebase
-const app = initializeApp(firebaseConfig);
+const app = firebase.initializeApp(firebaseConfig);
 
 // Initialize Cloud Storage and get a reference to the service
 // const storage = firebase.getStorage(app);
-const storage = firebaseStorage.getStorage(app);
+const storage = firebase.storage.getStorage(app);
 
 
 exports.handler = async event => {
   console.log(event)
   //let audioFile = Buffer.from(event.body, "base64")
-  let audioFile = firebaseFirestore.Blob.fromBase64String(event.body)
+  let audioFile = firebase.firestore.Blob.fromBase64String(event.body)
   console.log(audioFile)
   console.log(event.body)
 
-  const storageRef = firebaseStorage.ref(storage, "audio");
-  
+  const storageRef = firebase.storage.ref(storage, "audio");
+
   let metadata = {
     contentType: 'audio/m4a'
   }
 
   // var blob = new Blob([audioFile], {type: 'audio/mp3'});
   // storageRef.put(blob);
-  firebaseStorage.uploadBytes(storageRef, audioFile, metadata).then((snapshot) => {
+  firebase.storage.uploadBytes(storageRef, audioFile, metadata).then((snapshot) => {
     console.log('Uploaded audio file!')
   });
 
