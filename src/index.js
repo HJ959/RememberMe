@@ -51,7 +51,7 @@ uploadButton.addEventListener("click", async () => {
   try {
     new_file = new File([file], `${serialNumberForFile}.m4a`);
     console.log(new_file)
-    var base64Audio = audioToBase64(new_file)
+    var base64Audio = await audioToBase64(new_file)
     console.log(base64Audio)
     uploadFile(base64Audio)
   } catch (error) {
