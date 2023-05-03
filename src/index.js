@@ -53,7 +53,7 @@ uploadButton.addEventListener("click", async () => {
     console.log(new_file)
     var base64Audio = await audioToBase64(new_file)
     console.log(base64Audio)
-    uploadFile(`${serialNumber}SPLITSTRING${base64Audio}`)
+    uploadFile(`${serialNumberForFile}SPLITSTRING${base64Audio}`)
   } catch (error) {
     console.log("Argh! " + error);
   }
