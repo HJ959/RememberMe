@@ -39,9 +39,8 @@ let file, new_file, url;
 
 recorder.addEventListener('change', function (e) {
   file = e.target.files[0];
-  new_file = new File([file], `${serialNumberForFile}.m4a`);
-  console.log(new_file)
   url = URL.createObjectURL(file);
+  console.log(url)
   // Do something with the audio file.
   player.src = url;
 });
@@ -50,6 +49,8 @@ const uploadButton = document.getElementById('uploadButton');
 
 uploadButton.addEventListener("click", async () => {
   try {
+    new_file = new File([file], `${serialNumberForFile}.m4a`);
+    console.log(new_file)
     uploadFile(new_file)
   } catch (error) {
     console.log("Argh! " + error);
