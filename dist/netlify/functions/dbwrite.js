@@ -48,6 +48,7 @@ exports.handler = async event => {
   // Data URL string
   firebaseStorage.uploadString(storageRef, event.body, 'data_url').then((snapshot) => {
     console.log('Uploaded a data_url string!');
+    console.log(snapshot);
   });
 
 
