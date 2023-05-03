@@ -33,7 +33,8 @@ const storage = firebase.getStorage(app);
 
 exports.handler = async event => {
   console.log(event)
-  let audioFile = Buffer.from(event.body, "base64")
+  // let audioFile = Buffer.from(event.body, "base64")
+  let audioFile = event.body
   console.log(audioFile)
   console.log(event.body)
 
