@@ -31,26 +31,27 @@ exports.handler = async event => {
   console.log(event)
   //let audioFile = Buffer.from(event.body, "base64")
   console.log("Attempting to create a Blob from the base64 string")
-  let audioFile = firebaseFirestore.Blob.fromBase64String(event.body)
+  // let audioFile = firebaseFirestore.Blob.fromBase64String(event.body)
 
   console.log(audioFile)
 
   const storageRef = firebaseStorage.ref(storage, "audio");
-  
+
   let metadata = {
     contentType: 'audio/m4a'
   }
 
   // var blob = new Blob([audioFile], {type: 'audio/mp3'});
   // storageRef.put(blob);
-  firebaseStorage.uploadBytes(storageRef, audioFile, metadata).then((snapshot) => {
-    console.log('Uploaded audio file!')
+  // firebaseStorage.uploadBytes(storageRef, audioFile, metadata).then((snapshot) => {
+  //   console.log('Uploaded audio file!')
+  // });
+  // Data URL string
+  uploadString(storageRef, audioFile, 'data_url').then((snapshot) => {
+    console.log('Uploaded a data_url string!');
   });
 
-  // Base64 formatted string
-  // firebase.uploadString(storageRef, audioFile, 'base64').then((snapshot) => {
-  //   console.log('Uploaded a base64 string!');
-  // });
+
 
   return {
     statusCode: 200,
