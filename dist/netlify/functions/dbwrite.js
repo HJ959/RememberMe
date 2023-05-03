@@ -30,12 +30,11 @@ const storage = firebaseStorage.getStorage(app);
 exports.handler = async event => {
   console.log(event)
   //let audioFile = Buffer.from(event.body, "base64")
-  console.log("Attempting to create a Blob from the base64 string")
+  // console.log("Attempting to create a Blob from the base64 string")
   // let audioFile = firebaseFirestore.Blob.fromBase64String(event.body)
 
-  console.log(audioFile)
-
   const storageRef = firebaseStorage.ref(storage, "audio");
+  console.log(storageRef)
 
   let metadata = {
     contentType: 'audio/m4a'
