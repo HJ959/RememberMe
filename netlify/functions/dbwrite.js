@@ -1,4 +1,4 @@
-import * as firebase from "firebase"
+import * as firebase from "firebase/"
 // const Buffer = require('buffer').Buffer
 
 // TODO: Replace the following with your app's Firebase project configuration
