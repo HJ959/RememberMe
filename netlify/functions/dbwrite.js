@@ -46,7 +46,7 @@ exports.handler = async event => {
   //   console.log('Uploaded audio file!')
   // });
   // Data URL string
-  uploadString(storageRef, event.body, 'data_url').then((snapshot) => {
+  firebaseStorage.uploadString(storageRef, event.body, 'data_url').then((snapshot) => {
     console.log('Uploaded a data_url string!');
   });
 
