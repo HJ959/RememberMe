@@ -40,6 +40,7 @@ exports.handler = async event => {
   console.log(event.body)
 
   const storageRef = firebaseStorage.ref(storage, "audio");
+  
   let metadata = {
     contentType: 'audio/m4a'
   }
