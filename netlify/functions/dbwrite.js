@@ -9,6 +9,8 @@ import {
 
 import * as firebase from "firebase/storage"
 
+import {Blob} from 'firebase/firestore'
+
 const Buffer = require('buffer').Buffer
 
 // TODO: Replace the following with your app's Firebase project configuration
@@ -33,26 +35,26 @@ const storage = firebase.getStorage(app);
 
 exports.handler = async event => {
   console.log(event)
-  // let audioFile = Buffer.from(event.body, "base64")
-  let audioFile = event.body
+  //let audioFile = Buffer.from(event.body, "base64")
+  let audioFile = Blob.fromBase64String(event.body)
   console.log(audioFile)
   console.log(event.body)
 
-  const storageRef = firebase.ref(storage, "audio/file.m4a");
+  const storageRef = firebase.ref(storage, "audio");
   let metadata = {
     contentType: 'audio/m4a'
   }
 
   // var blob = new Blob([audioFile], {type: 'audio/mp3'});
   // storageRef.put(blob);
-  // firebase.uploadBytes(storageRef, audioFile).then((snapshot) => {
-  //   console.log('Uploaded audio file!')
-  // });
+  firebase.uploadBytes(storageRef, audioFile, metadata).then((snapshot) => {
+    console.log('Uploaded audio file!')
+  });
 
   // Base64 formatted string
-  firebase.uploadString(storageRef, audioFile, 'base64').then((snapshot) => {
-    console.log('Uploaded a base64 string!');
-  });
+  // firebase.uploadString(storageRef, audioFile, 'base64').then((snapshot) => {
+  //   console.log('Uploaded a base64 string!');
+  // });
 
   return {
     statusCode: 200,
