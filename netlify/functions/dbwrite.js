@@ -33,7 +33,7 @@ exports.handler = async event => {
   // console.log("Attempting to create a Blob from the base64 string")
   // let audioFile = firebaseFirestore.Blob.fromBase64String(event.body)
 
-  const storageRef = firebaseStorage.ref(storage);
+  const storageRef = firebaseStorage.ref(storage, 'file.m4a');
   console.log(storageRef)
 
   let metadata = {
