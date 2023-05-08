@@ -32,10 +32,10 @@ exports.handler = async event => {
   //let audioFile = Buffer.from(event.body, "base64")
   // console.log("Attempting to create a Blob from the base64 string")
   // let audioFile = firebaseFirestore.Blob.fromBase64String(event.body)
-  let filename = `${event.body.split("SPLITSTRING")[0]}.m4a`
+  let filename = `${event.body.split("SPLITSTRING")[0].toUpperCase()}.m4a`
   let audioDataURL = event.body.split("SPLITSTRING")[1]
 
-  filename = filename.replaceAll(":", " ").toUpperCase();
+  filename = filename.replaceAll(":", " ");
   
   const storageRef = firebaseStorage.ref(storage, filename);
   console.log(storageRef)
