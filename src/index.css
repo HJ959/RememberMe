@@ -7,8 +7,8 @@ html,
 body {
     width: 100%;
     height: 100%;
-    background: black;
-    color: whitesmoke;
+    background: #6BB0F9;
+    color: gold;
     font-family: MyWebFont;
     font-size: 1.3em;
 }
@@ -24,7 +24,7 @@ body {
 button {
     width: 100%;
     height: 10%;
-    background-color: whitesmoke;
+    background-color: #425CA7;
 
 }
 
