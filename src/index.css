@@ -7,7 +7,7 @@ html,
 body {
     width: 100%;
     height: 100%;
-    background: #6BB0F9;
+    background: #425CA7;
     color: gold;
     font-family: MyWebFont;
     font-size: 1.3em;
@@ -24,8 +24,9 @@ body {
 button {
     width: 100%;
     height: 10%;
-    background-color: #425CA7;
+    background-color: #6BB0F9;
     color: gold;
+    font-family: MyWebFont;
 
 }
 
