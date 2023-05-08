@@ -7,7 +7,7 @@
     "env": "env",
     "start": "webpack serve --open --host 0.0.0.0 --port 8888 --config webpack.dev.config.js",
     "build-prod": "rm -R dist && webpack --config webpack.prod.config.js && cp -r netlify dist/netlify && cp src/package.json dist/package.json",
-    "build-dev": "webpack --config webpack.dev.config.js --watch",
+    "build-dev": "cp src/*png dev/ && webpack --config webpack.dev.config.js --watch",
     "build-all": "npm run clean && npm run build-prod && npm run build-dev"
   },
   "devDependencies": {
