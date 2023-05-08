@@ -8,16 +8,15 @@ body {
     width: 100%;
     height: 100%;
     background: #425CA7;
-    color: gold;
+    color: white;
     font-family: MyWebFont;
-    font-size: 1.3em;
+    font-size: 1.5em;
 }
 
 
 .container {
     height: 85vh;
     width: 80vw;
-    border-style: solid;
     padding: 10px;
 }
 
@@ -25,13 +24,19 @@ button {
     width: 100%;
     height: 10%;
     background-color: #6BB0F9;
-    color: gold;
+    color: white;
     font-family: MyWebFont;
+    font-size: 1.5em;
 }
 
 .center {
     margin: auto;
     padding-bottom: 1%;
+}
+
+img {
+    width: 100%;
+    padding: 0;
 }
 
 ul {
