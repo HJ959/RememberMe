@@ -34,6 +34,8 @@ exports.handler = async event => {
   // let audioFile = firebaseFirestore.Blob.fromBase64String(event.body)
   let filename = `${event.body.split("SPLITSTRING")[0]}.m4a`
   let audioDataURL = event.body.split("SPLITSTRING")[1]
+
+  filename = filename.replaceAll(":", " ");
   
   const storageRef = firebaseStorage.ref(storage, filename);
   console.log(storageRef)
