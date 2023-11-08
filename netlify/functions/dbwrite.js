@@ -3,7 +3,7 @@ import {
 } from "firebase/app";
 
 import * as firebaseStorage from "firebase/storage"
-import * as firebaseFirestore from 'firebase/firestore'
+// import * as firebaseFirestore from 'firebase/firestore'
 
 const Buffer = require('buffer').Buffer
 
@@ -44,18 +44,8 @@ exports.handler = async event => {
     contentType: 'audio/m4a'
   }
 
-
-  // var blob = new Blob([audioFile], {type: 'audio/mp3'});
-  // storageRef.put(blob);
-  // firebaseStorage.uploadBytes(storageRef, audioFile, metadata).then((snapshot) => {
-  //   console.log('Uploaded audio file!')
-  // });
   // Data URL string
   await firebaseStorage.uploadString(storageRef, audioDataURL, 'data_url')
-  // firebaseStorage.uploadString(storageRef, event.body, 'data_url').then((snapshot) => {
-  //   console.log('Uploaded a data_url string!');
-  //   console.log(snapshot);
-  // });
 
   return {
     statusCode: 200,
@@ -65,5 +55,4 @@ exports.handler = async event => {
       "Access-Control-Allow-Methods": "GET, POST, OPTION",
     },
   }
-
 }
