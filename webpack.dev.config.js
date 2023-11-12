@@ -19,7 +19,15 @@ module.exports = {
   devServer: {
     static: './dev',
     compress: true,
-    http2: true,
+    server: {
+      type: 'https',
+    },
+    hot: true,
+  },
+
+  watchOptions: {
+    poll: true,
+    ignored: /node_modules/
   },
 
   plugins: [

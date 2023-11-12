@@ -1,7 +1,6 @@
 // start of index.js
 import './index.css'
 
-
 const scanButton = document.getElementById('scanButton')
 const output = document.getElementById('output')
 const outputUpload = document.getElementById('outputUpload')
