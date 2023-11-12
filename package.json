@@ -24,7 +24,5 @@
     "webpack-dev-server": "^4.15.1"
   },
   "dependencies": {
-    "firebase": "^9.23.0",
-    "node-fetch": "^2.7.0"
   }
 }

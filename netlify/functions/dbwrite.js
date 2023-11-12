@@ -3,9 +3,6 @@ import {
 } from "firebase/app";
 
 import * as firebaseStorage from "firebase/storage"
-// import * as firebaseFirestore from 'firebase/firestore'
-
-const Buffer = require('buffer').Buffer
 
 // TODO: Replace the following with your app's Firebase project configuration
 // See: https://firebase.google.com/docs/web/learn-more#config-object
@@ -29,9 +26,6 @@ const storage = firebaseStorage.getStorage(app);
 
 exports.handler = async event => {
   console.log(event)
-  //let audioFile = Buffer.from(event.body, "base64")
-  // console.log("Attempting to create a Blob from the base64 string")
-  // let audioFile = firebaseFirestore.Blob.fromBase64String(event.body)
   let filename = `${event.body.split("SPLITSTRING")[0].toUpperCase()}.m4a`
   let audioDataURL = event.body.split("SPLITSTRING")[1]
 
