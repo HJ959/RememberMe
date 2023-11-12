@@ -17,14 +17,15 @@ const firebaseConfig = {
   measurementId: "G-QBM1MXGE28"
 };
 
-// Initialize Firebase
-const app = initializeApp(firebaseConfig);
-
-// Initialize Cloud Storage and get a reference to the service
-// const storage = firebase.getStorage(app);
-const storage = firebaseStorage.getStorage(app);
 
 exports.handler = async event => {
+  // Initialize Firebase
+  const app = initializeApp(firebaseConfig);
+  
+  // Initialize Cloud Storage and get a reference to the service
+  // const storage = firebase.getStorage(app);
+  const storage = firebaseStorage.getStorage(app);
+  console.log(app)
   console.log(event)
   let filename = `${event.body.split("SPLITSTRING")[0].toUpperCase()}.m4a`
   let audioDataURL = event.body.split("SPLITSTRING")[1]
