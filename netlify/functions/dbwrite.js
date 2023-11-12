@@ -4,9 +4,6 @@ import {
 
 import * as firebaseStorage from "firebase/storage"
 
-// var firebase = require('firebase');
-// var firebaseui = require('firebaseui');
-
 const firebaseConfig = {
   apiKey: process.env.DB_API_KEY,
   authDomain: "forgetmenot-album-218fb.firebaseapp.com",
@@ -17,16 +14,17 @@ const firebaseConfig = {
   measurementId: "G-QBM1MXGE28"
 };
 
+// Initialize Firebase
+const app = initializeApp(firebaseConfig);
+  
+// Initialize Cloud Storage and get a reference to the service
+const storage = firebaseStorage.getStorage(app);
 
 exports.handler = async event => {
-  // Initialize Firebase
-  const app = initializeApp(firebaseConfig);
-  
-  // Initialize Cloud Storage and get a reference to the service
-  // const storage = firebase.getStorage(app);
-  const storage = firebaseStorage.getStorage(app);
   console.log(app)
+  console.log("====================================")
   console.log(event)
+  console.log("====================================")
   let filename = `${event.body.split("SPLITSTRING")[0].toUpperCase()}.m4a`
   let audioDataURL = event.body.split("SPLITSTRING")[1]
 
@@ -34,11 +32,8 @@ exports.handler = async event => {
   
   const storageRef = firebaseStorage.ref(storage, `Audio/${filename}`);
   console.log(storageRef)
-
-  let metadata = {
-    contentType: 'audio/m4a'
-  }
-
+  console.log("====================================")
+  
   // Data URL string
   await firebaseStorage.uploadString(storageRef, audioDataURL, 'data_url')
 

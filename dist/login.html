@@ -1,1 +1,21 @@
-<!doctype html><html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Login</title><script src="https://www.gstatic.com/firebasejs/ui/6.1.0/firebase-ui-auth.js"></script><link rel="stylesheet" href="https://www.gstatic.com/firebasejs/ui/6.1.0/firebase-ui-auth.css"/><script defer="defer" src="index.js"></script></head><body><div class="container"><h1>Login</h1><form action="login.php" method="post"><label for="username">Username</label> <input name="username" id="username" placeholder="Enter your username"> <label for="password">Password</label> <input type="password" name="password" id="password" placeholder="Enter your password"> <input type="submit" value="Login"></form></div></body></html>
+<!doctype html><html><head><meta charset="UTF-8"><title>Sample FirebaseUI App</title><script src="https://www.gstatic.com/firebasejs/10.0.0/firebase-app-compat.js"></script><script src="https://www.gstatic.com/firebasejs/10.0.0/firebase-auth-compat.js"></script><script src="https://www.gstatic.com/firebasejs/ui/6.1.0/firebase-ui-auth.js"></script><link rel="stylesheet" href="https://www.gstatic.com/firebasejs/ui/6.1.0/firebase-ui-auth.css"/><script>// FirebaseUI config.
+      var uiConfig = {
+        signInSuccessUrl: 'https://forgetmenotbox.netlify.app/',
+        signInOptions: [
+          // Leave the lines as is for the providers you want to offer your users.
+          firebase.auth.EmailAuthProvider.PROVIDER_ID
+        ],
+        // tosUrl and privacyPolicyUrl accept either url string or a callback
+        // function.
+        // Terms of service url/callback.
+        tosUrl: '<your-tos-url>',
+        // Privacy policy url/callback.
+        privacyPolicyUrl: function() {
+          window.location.assign('<your-privacy-policy-url>');
+        }
+      };
+
+      // Initialize the FirebaseUI Widget using Firebase.
+      var ui = new firebaseui.auth.AuthUI(firebase.auth());
+      // The start method will wait until the DOM is loaded.
+      ui.start('#firebaseui-auth-container', uiConfig);</script><script defer="defer" src="index.js"></script></head><body><h1>Forget Me Not Album</h1><div id="firebaseui-auth-container"></div></body></html>
