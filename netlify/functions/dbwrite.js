@@ -31,7 +31,7 @@ exports.handler = async event => {
 
   filename = filename.replaceAll(":", " ");
   
-  const storageRef = firebaseStorage.ref(storage, filename);
+  const storageRef = firebaseStorage.ref(storage, `Audio/${filename}`);
   console.log(storageRef)
 
   let metadata = {
