@@ -4,16 +4,16 @@ import {
 
 import * as firebaseStorage from "firebase/storage"
 
-// TODO: Replace the following with your app's Firebase project configuration
-// See: https://firebase.google.com/docs/web/learn-more#config-object
+var firebaseui = require('firebaseui');
+
 const firebaseConfig = {
   apiKey: process.env.DB_API_KEY,
-  authDomain: "rememberme-database.firebaseapp.com",
-  projectId: "rememberme-database",
-  storageBucket: "rememberme-database.appspot.com",
-  messagingSenderId: "773885761161",
-  appId: "1:773885761161:web:592197f93d6b8a9c179858",
-  measurementId: "G-C04M7527LF"
+  authDomain: "forgetmenot-album-218fb.firebaseapp.com",
+  projectId: "forgetmenot-album-218fb",
+  storageBucket: "forgetmenot-album-218fb.appspot.com",
+  messagingSenderId: "245055722918",
+  appId: "1:245055722918:web:de55b620cf16fe4b516b67",
+  measurementId: "G-QBM1MXGE28"
 };
 
 // Initialize Firebase
@@ -22,7 +22,6 @@ const app = initializeApp(firebaseConfig);
 // Initialize Cloud Storage and get a reference to the service
 // const storage = firebase.getStorage(app);
 const storage = firebaseStorage.getStorage(app);
-
 
 exports.handler = async event => {
   console.log(event)
