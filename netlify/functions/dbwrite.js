@@ -4,7 +4,8 @@ import {
 
 import * as firebaseStorage from "firebase/storage"
 
-// var firebaseui = require('firebaseui');
+var firebase = require('firebase');
+var firebaseui = require('firebaseui');
 
 const firebaseConfig = {
   apiKey: process.env.DB_API_KEY,
