@@ -6,19 +6,21 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    <script src="https://www.google.com/recaptcha/enterprise.js?render=6Lch2Q0pAAAAAC0OI5eZW8wlZg7JNJZgYSuht27Z" async defer></script>
     <script defer src="index.js"></script>
 </head>
 
 <body>
     <div id="loginScreen">
-        <!-- Screen for login -->
         <div class="container center">
-            <h1>Forget Me Not</h1>
-            <h3>Please login to continue</h3>
-            <form method="GET">
-                <input type="text" name="username" placeholder="Username" required>
-                <input type="password" name="password" placeholder="Password" required>
-                <button type="submit" name="loginButton" onClick="login(this.form)">Login</button>
+            <img src="forgetmenot (1).png">
+            <h3>Please login to the Forget Me Not Box</h3>
+            <form id="login-form">
+                <input type="text" name="username" id="username-field" class="login-form-field" placeholder="Username"
+                    required>
+                <input type="password" name="password" id="password-field" class="login-form-field"
+                    placeholder="Password" required>
+                <input type="submit" value="Login" id="login-form-submit">
             </form>
             <div class="spacer"></div>
         </div>

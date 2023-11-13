@@ -15,25 +15,26 @@ const firebaseApp = initializeApp({
 
 const auth = getAuth(firebaseApp)
 
-function login(form) {
-  email = form.inputbox.value
-  password = form.password.value
+const loginForm = document.getElementById("login-form");
+const loginButton = document.getElementById("login-form-submit");
 
-  console.log(email, password)
-  // signInWithEmailAndPassword(auth, email, password)
-  //   .then((userCredential) => {
-  //     // Signed in 
-  //     const user = userCredential.user;
-  //     console.log(user)
-  //     // ...
-  //   })
-  //   .catch((error) => {
-  //     const errorCode = error.code;
-  //     const errorMessage = error.message;
-  //     console.log(errorCode, errorMessage)
-  //   });
-}
-window.login = login
+loginButton.addEventListener("click", (e) => {
+    e.preventDefault();
+    const email = loginForm.username.value;
+    const password = loginForm.password.value;
+    signInWithEmailAndPassword(auth, email, password)
+    .then((userCredential) => {
+      // Signed in 
+      const user = userCredential.user;
+      console.log(user)
+      // ...
+    })
+    .catch((error) => {
+      const errorCode = error.code;
+      const errorMessage = error.message;
+      console.log(errorCode, errorMessage)
+    });
+})
 
 const logoutButton = document.getElementById('logoutButton')
 logoutButton.addEventListener("click", () => {
@@ -46,19 +47,25 @@ logoutButton.addEventListener("click", () => {
 
 const appScreen = document.getElementById('webApp')
 const loginScreen = document.getElementById('loginScreen')
-// onAuthStateChanged(auth, (user) => {
-//   if (user != null) {
-//     loginScreen.style.display = "none"
-//     appScreen.style.display = "block"
-//     console.log("Logged in")
-//     console.log(user)
-//   } else {
-//     console.log("No user")
-//     loginScreen.style.display = "block"
-//     appScreen.style.display = "none"
-//   }
-// })
+onAuthStateChanged(auth, (user) => {
+  if (user != null) {
+    loginScreen.style.display = "none"
+    appScreen.style.display = "block"
+    console.log("Logged in")
+    console.log(user)
+  } else {
+    console.log("No user")
+    loginScreen.style.display = "block"
+    appScreen.style.display = "none"
+  }
+})
 
+function onClick(e) {
+  e.preventDefault();
+  grecaptcha.enterprise.ready(async () => {
+    const token = await grecaptcha.enterprise.execute('6Lch2Q0pAAAAAC0OI5eZW8wlZg7JNJZgYSuht27Z', {action: 'LOGIN'});
+  });
+}
 const scanButton = document.getElementById('scanButton')
 const output = document.getElementById('output')
 const outputUpload = document.getElementById('outputUpload')
