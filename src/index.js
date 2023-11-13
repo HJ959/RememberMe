@@ -1,5 +1,63 @@
 // start of index.js
 import './index.css'
+import { initializeApp } from 'firebase/app'
+import { getAuth, onAuthStateChanged, signInWithEmailAndPassword, signOut } from 'firebase/auth'
+
+const firebaseApp = initializeApp({
+  apiKey: "AIzaSyB0HHbyIG6lG_JkN-nzFXRoiHc0-ZtKnSo",
+  authDomain: "forgetmenot-album-218fb.firebaseapp.com",
+  projectId: "forgetmenot-album-218fb",
+  storageBucket: "forgetmenot-album-218fb.appspot.com",
+  messagingSenderId: "245055722918",
+  appId: "1:245055722918:web:de55b620cf16fe4b516b67",
+  measurementId: "G-QBM1MXGE28"
+})
+
+const auth = getAuth(firebaseApp)
+
+function login(form) {
+  email = form.inputbox.value
+  password = form.password.value
+
+  console.log(email, password)
+  // signInWithEmailAndPassword(auth, email, password)
+  //   .then((userCredential) => {
+  //     // Signed in 
+  //     const user = userCredential.user;
+  //     console.log(user)
+  //     // ...
+  //   })
+  //   .catch((error) => {
+  //     const errorCode = error.code;
+  //     const errorMessage = error.message;
+  //     console.log(errorCode, errorMessage)
+  //   });
+}
+window.login = login
+
+const logoutButton = document.getElementById('logoutButton')
+logoutButton.addEventListener("click", () => {
+  signOut(auth).then(() => {
+    // Sign-out successful.
+  }).catch((error) => {
+    // An error happened.
+  });
+})
+
+const appScreen = document.getElementById('webApp')
+const loginScreen = document.getElementById('loginScreen')
+// onAuthStateChanged(auth, (user) => {
+//   if (user != null) {
+//     loginScreen.style.display = "none"
+//     appScreen.style.display = "block"
+//     console.log("Logged in")
+//     console.log(user)
+//   } else {
+//     console.log("No user")
+//     loginScreen.style.display = "block"
+//     appScreen.style.display = "none"
+//   }
+// })
 
 const scanButton = document.getElementById('scanButton')
 const output = document.getElementById('output')
