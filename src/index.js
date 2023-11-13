@@ -17,6 +17,7 @@ const auth = getAuth(firebaseApp)
 
 const loginForm = document.getElementById("login-form");
 const loginButton = document.getElementById("login-form-submit");
+let user
 
 loginButton.addEventListener("click", (e) => {
     e.preventDefault();
@@ -30,7 +31,7 @@ loginButton.addEventListener("click", (e) => {
     signInWithEmailAndPassword(auth, email, password)
     .then((userCredential) => {
       // Signed in 
-      const user = userCredential.user;
+      user = userCredential.user;
       // ...
     })
     .catch((error) => {
