@@ -25,12 +25,13 @@ exports.handler = async event => {
   console.log("====================================")
   console.log(event)
   console.log("====================================")
-  let filename = `${event.body.split("SPLITSTRING")[0].toUpperCase()}.m4a`
-  let audioDataURL = event.body.split("SPLITSTRING")[1]
+  let uid = `${event.body.split("SPLITSTRING")[0]}`
+  let filename = `${event.body.split("SPLITSTRING")[1].toUpperCase()}.m4a`
+  let audioDataURL = event.body.split("SPLITSTRING")[2]
 
   filename = filename.replaceAll(":", " ");
   
-  const storageRef = firebaseStorage.ref(storage, `Audio/${filename}`);
+  const storageRef = firebaseStorage.ref(storage, `${uid}/${filename}`);
   console.log(storageRef)
   console.log("====================================")
   

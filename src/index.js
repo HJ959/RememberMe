@@ -20,13 +20,17 @@ const loginButton = document.getElementById("login-form-submit");
 
 loginButton.addEventListener("click", (e) => {
     e.preventDefault();
+    grecaptcha.enterprise.ready(async () => {
+      const token = await grecaptcha.enterprise.execute('6Lch2Q0pAAAAAC0OI5eZW8wlZg7JNJZgYSuht27Z', {action: 'LOGIN'});
+      console.log(token)
+    })
+
     const email = loginForm.username.value;
     const password = loginForm.password.value;
     signInWithEmailAndPassword(auth, email, password)
     .then((userCredential) => {
       // Signed in 
       const user = userCredential.user;
-      console.log(user)
       // ...
     })
     .catch((error) => {
@@ -52,7 +56,6 @@ onAuthStateChanged(auth, (user) => {
     loginScreen.style.display = "none"
     appScreen.style.display = "block"
     console.log("Logged in")
-    console.log(user)
   } else {
     console.log("No user")
     loginScreen.style.display = "block"
@@ -60,12 +63,6 @@ onAuthStateChanged(auth, (user) => {
   }
 })
 
-function onClick(e) {
-  e.preventDefault();
-  grecaptcha.enterprise.ready(async () => {
-    const token = await grecaptcha.enterprise.execute('6Lch2Q0pAAAAAC0OI5eZW8wlZg7JNJZgYSuht27Z', {action: 'LOGIN'});
-  });
-}
 const scanButton = document.getElementById('scanButton')
 const output = document.getElementById('output')
 const outputUpload = document.getElementById('outputUpload')
@@ -117,7 +114,7 @@ uploadButton.addEventListener("click", async () => {
     console.log(new_file)
     var base64Audio = await audioToBase64(new_file)
     console.log(base64Audio)
-    uploadFile(`${serialNumberForFile}SPLITSTRING${base64Audio}`)
+    uploadFile(`${user.uid}SPLITSTRING${serialNumberForFile}SPLITSTRING${base64Audio}`)
   } catch (error) {
     console.log("Argh! " + error);
   }
