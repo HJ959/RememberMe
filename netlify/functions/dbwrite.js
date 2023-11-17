@@ -16,7 +16,7 @@ const firebaseConfig = {
 
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);
-  
+
 // Initialize Cloud Storage and get a reference to the service
 const storage = firebaseStorage.getStorage(app);
 
@@ -25,16 +25,27 @@ exports.handler = async event => {
   console.log("====================================")
   console.log(event)
   console.log("====================================")
-  let uid = `${event.body.split("SPLITSTRING")[0]}`
+  let userIdToken = `${event.body.split("SPLITSTRING")[0]}`
   let filename = `${event.body.split("SPLITSTRING")[1].toUpperCase()}.m4a`
   let audioDataURL = event.body.split("SPLITSTRING")[2]
 
-  filename = filename.replaceAll(":", " ");
+  const uid
+  // idToken comes from the client app
+  getAuth()
+    .verifyIdToken(userIdToken)
+    .then((decodedToken) => {
+      uid = decodedToken.uid;
+    })
+    .catch((error) => {
+      console.log(error)
+    })
   
+  filename = filename.replaceAll(":", " ");
+
   const storageRef = firebaseStorage.ref(storage, `${uid}/${filename}`);
   console.log(storageRef)
   console.log("====================================")
-  
+
   // Data URL string
   await firebaseStorage.uploadString(storageRef, audioDataURL, 'data_url')
 

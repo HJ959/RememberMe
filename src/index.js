@@ -115,7 +115,13 @@ uploadButton.addEventListener("click", async () => {
     console.log(new_file)
     var base64Audio = await audioToBase64(new_file)
     console.log(base64Audio)
-    uploadFile(`${user.uid}SPLITSTRING${serialNumberForFile}SPLITSTRING${base64Audio}`)
+    var userIdToken
+    firebase.auth().currentUser.getIdToken(/* forceRefresh */ true).then(function(idToken) {
+      userIdToken = idToken
+    }).catch(function(error) {
+      console.log(`ID token error ${error}`)
+    });    
+    uploadFile(`${userIdToken}SPLITSTRING${serialNumberForFile}SPLITSTRING${base64Audio}`)
   } catch (error) {
     console.log("Argh! " + error);
   }
