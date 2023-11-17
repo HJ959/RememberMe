@@ -29,7 +29,7 @@ exports.handler = async event => {
   let filename = `${event.body.split("SPLITSTRING")[1].toUpperCase()}.m4a`
   let audioDataURL = event.body.split("SPLITSTRING")[2]
 
-  const uid
+  let uid
   // idToken comes from the client app
   getAuth()
     .verifyIdToken(userIdToken)

@@ -116,7 +116,7 @@ uploadButton.addEventListener("click", async () => {
     var base64Audio = await audioToBase64(new_file)
     console.log(base64Audio)
     var userIdToken
-    firebase.auth().currentUser.getIdToken(/* forceRefresh */ true).then(function(idToken) {
+    auth().currentUser.getIdToken(/* forceRefresh */ true).then(function(idToken) {
       userIdToken = idToken
     }).catch(function(error) {
       console.log(`ID token error ${error}`)
