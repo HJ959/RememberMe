@@ -61,7 +61,7 @@ onAuthStateChanged(auth, (user) => {
     loginScreen.style.display = "none"
     appScreen.style.display = "block"
     console.log("Logged in")
-    user = userCredential.user;
+    console.log(user)
   } else {
     console.log("No user")
     loginScreen.style.display = "block"
