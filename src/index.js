@@ -116,7 +116,7 @@ uploadButton.addEventListener("click", async () => {
     var base64Audio = await audioToBase64(new_file)
     console.log(base64Audio)
     var userIdToken
-    auth().currentUser.getIdToken(/* forceRefresh */ true).then(function(idToken) {
+    auth.currentUser.getIdToken(/* forceRefresh */ true).then(function(idToken) {
       userIdToken = idToken
     }).catch(function(error) {
       console.log(`ID token error ${error}`)
@@ -139,7 +139,7 @@ function handleResponseUpload(response) {
   if (response.status === 200) {
     outputUpload.innerHTML = 'Success! File upload!'
   } else {
-    outputUpload.innerHTML = `Failed with code: ${response.status}`
+    outputUpload.innerHTML = `Failed with code: ${response}`
   }
 }
 
