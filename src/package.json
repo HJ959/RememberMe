@@ -2,7 +2,6 @@
     "description": "This is the package.json that lives on the node.js server on netlify",
     "dependencies": {
         "firebase-admin": "^11.11.0",
-        "firebase": "^10.6.0",
-        "firebaseui": "^6.1.0"
+        "firebase": "^10.6.0"
     }
 }

@@ -1,8 +1,6 @@
-import {
-  initializeApp
-} from "firebase/app";
+import { initializeApp } from 'firebase-admin/app'
+import { getAuth } from 'firebase-admin/auth'
 import * as firebaseStorage from "firebase/storage"
-import { getAuth } from 'firebase/auth'
 
 const firebaseConfig = {
   apiKey: process.env.DB_API_KEY,
