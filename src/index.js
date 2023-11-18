@@ -15,7 +15,7 @@ const firebaseApp = initializeApp({
 })
 
 // Initialize Cloud Storage and get a reference to the service
-const storage = firebaseStorage.getStorage(app);
+const storage = firebaseStorage.getStorage(firebaseApp);
 const auth = getAuth(firebaseApp)
 
 const loginForm = document.getElementById("login-form");
