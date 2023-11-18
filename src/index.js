@@ -121,7 +121,7 @@ uploadButton.addEventListener("click", async () => {
     var base64Audio = await audioToBase64(new_file)
     console.log(base64Audio)
     const storageRef = firebaseStorage.ref(storage, `${user.uid}/${serialNumberForFile}.m4a`);
-    await firebaseStorage.uploadString(storageRef, audioDataURL, 'data_url')
+    await firebaseStorage.uploadString(storageRef, base64Audio, 'data_url')
     //uploadFile(`${userIdToken}SPLITSTRING${serialNumberForFile}SPLITSTRING${base64Audio}`)
   } catch (error) {
     console.log("Argh! " + error);
