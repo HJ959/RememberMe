@@ -1,8 +1,8 @@
 import {
   initializeApp
 } from "firebase/app";
-
 import * as firebaseStorage from "firebase/storage"
+import { getAuth } from 'firebase/auth'
 
 const firebaseConfig = {
   apiKey: process.env.DB_API_KEY,
