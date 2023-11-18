@@ -20,15 +20,15 @@ const loginButton = document.getElementById("login-form-submit");
 let user
 
 loginButton.addEventListener("click", (e) => {
-    e.preventDefault();
-    grecaptcha.enterprise.ready(async () => {
-      const token = await grecaptcha.enterprise.execute('6Lch2Q0pAAAAAC0OI5eZW8wlZg7JNJZgYSuht27Z', {action: 'LOGIN'});
-      console.log(token)
-    })
+  e.preventDefault();
+  grecaptcha.enterprise.ready(async () => {
+    const token = await grecaptcha.enterprise.execute('6Lch2Q0pAAAAAC0OI5eZW8wlZg7JNJZgYSuht27Z', { action: 'LOGIN' });
+    console.log(token)
+  })
 
-    const email = loginForm.username.value;
-    const password = loginForm.password.value;
-    signInWithEmailAndPassword(auth, email, password)
+  const email = loginForm.username.value;
+  const password = loginForm.password.value;
+  signInWithEmailAndPassword(auth, email, password)
     .then((userCredential) => {
       // Signed in 
       user = userCredential.user;
@@ -52,11 +52,20 @@ logoutButton.addEventListener("click", () => {
 
 const appScreen = document.getElementById('webApp')
 const loginScreen = document.getElementById('loginScreen')
+let userIdToken
 onAuthStateChanged(auth, (user) => {
   if (user != null) {
     loginScreen.style.display = "none"
     appScreen.style.display = "block"
     console.log("Logged in")
+
+    console.log(user); // It shows the Firebase user
+    user.getIdToken().then(function (idToken) {  // <------ Check this line
+      console.log(idToken); // It shows the Firebase token now
+      userIdToken = idToken
+    })
+
+
   } else {
     console.log("No user")
     loginScreen.style.display = "block"
@@ -115,12 +124,6 @@ uploadButton.addEventListener("click", async () => {
     console.log(new_file)
     var base64Audio = await audioToBase64(new_file)
     console.log(base64Audio)
-    var userIdToken
-    auth.currentUser.getIdToken(/* forceRefresh */ true).then(function(idToken) {
-      userIdToken = idToken
-    }).catch(function(error) {
-      console.log(`ID token error ${error}`)
-    });    
     uploadFile(`${userIdToken}SPLITSTRING${serialNumberForFile}SPLITSTRING${base64Audio}`)
   } catch (error) {
     console.log("Argh! " + error);
