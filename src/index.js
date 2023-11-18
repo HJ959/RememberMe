@@ -2,6 +2,7 @@
 import './index.css'
 import { initializeApp } from 'firebase/app'
 import { getAuth, onAuthStateChanged, signInWithEmailAndPassword, signOut } from 'firebase/auth'
+import { getStorage } from "firebase/storage"
 
 const firebaseApp = initializeApp({
   apiKey: "AIzaSyB0HHbyIG6lG_JkN-nzFXRoiHc0-ZtKnSo",
@@ -13,6 +14,8 @@ const firebaseApp = initializeApp({
   measurementId: "G-QBM1MXGE28"
 })
 
+// Initialize Cloud Storage and get a reference to the service
+const storage = getStorage(firebaseApp);
 const auth = getAuth(firebaseApp)
 
 const loginForm = document.getElementById("login-form");
@@ -32,6 +35,7 @@ loginButton.addEventListener("click", (e) => {
     .then((userCredential) => {
       // Signed in 
       user = userCredential.user;
+      console.log(user)
       // ...
     })
     .catch((error) => {
@@ -52,20 +56,11 @@ logoutButton.addEventListener("click", () => {
 
 const appScreen = document.getElementById('webApp')
 const loginScreen = document.getElementById('loginScreen')
-let userIdToken
 onAuthStateChanged(auth, (user) => {
   if (user != null) {
     loginScreen.style.display = "none"
     appScreen.style.display = "block"
     console.log("Logged in")
-
-    console.log(user); // It shows the Firebase user
-    user.getIdToken().then(function (idToken) {  // <------ Check this line
-      console.log(idToken); // It shows the Firebase token now
-      userIdToken = idToken
-    })
-
-
   } else {
     console.log("No user")
     loginScreen.style.display = "block"
@@ -124,19 +119,21 @@ uploadButton.addEventListener("click", async () => {
     console.log(new_file)
     var base64Audio = await audioToBase64(new_file)
     console.log(base64Audio)
-    uploadFile(`${userIdToken}SPLITSTRING${serialNumberForFile}SPLITSTRING${base64Audio}`)
+    const storageRef = getStorage.ref(storage, `${user.uid}/${serialNumberForFile}.m4a`);
+    await getStorage.uploadString(storageRef, audioDataURL, 'data_url')
+    //uploadFile(`${userIdToken}SPLITSTRING${serialNumberForFile}SPLITSTRING${base64Audio}`)
   } catch (error) {
     console.log("Argh! " + error);
   }
 })
 
-async function uploadFile(fileToUpload) {
-  const response = await fetch('https://forgetmenotbox.netlify.app/.netlify/functions/dbwrite', {
-    method: "POST",
-    body: fileToUpload
-  })
-  return await handleResponseUpload(response)
-}
+// async function uploadFile(fileToUpload) {
+//   const response = await fetch('https://forgetmenotbox.netlify.app/.netlify/functions/dbwrite', {
+//     method: "POST",
+//     body: fileToUpload
+//   })
+//   return await handleResponseUpload(response)
+// }
 
 function handleResponseUpload(response) {
   if (response.status === 200) {
