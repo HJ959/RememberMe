@@ -2,7 +2,7 @@
 import './index.css'
 import { initializeApp } from 'firebase/app'
 import { getAuth, onAuthStateChanged, signInWithEmailAndPassword, signOut } from 'firebase/auth'
-import * as firebaseStorage from "firebase/storage"
+import { getStorage, ref, uploadString } from 'firebase/storage'
 
 const firebaseApp = initializeApp({
   apiKey: "AIzaSyB0HHbyIG6lG_JkN-nzFXRoiHc0-ZtKnSo",
@@ -15,7 +15,7 @@ const firebaseApp = initializeApp({
 })
 
 // Initialize Cloud Storage and get a reference to the service
-const storage = firebaseStorage.getStorage(firebaseApp);
+const storage = getStorage(firebaseApp);
 const auth = getAuth(firebaseApp)
 
 const loginForm = document.getElementById("login-form");
@@ -120,8 +120,8 @@ uploadButton.addEventListener("click", async () => {
     console.log(new_file)
     var base64Audio = await audioToBase64(new_file)
     console.log(base64Audio)
-    const storageRef = firebaseStorage.ref(storage, `${user.uid}/${serialNumberForFile}.m4a`);
-    await firebaseStorage.uploadString(storageRef, base64Audio, 'data_url')
+    const storageRef = ref(storage, `${user.uid}/${serialNumberForFile}.m4a`);
+    await uploadString(storageRef, base64Audio, 'data_url')
     //uploadFile(`${userIdToken}SPLITSTRING${serialNumberForFile}SPLITSTRING${base64Audio}`)
   } catch (error) {
     console.log("Argh! " + error);
