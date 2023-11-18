@@ -12,7 +12,7 @@ initializeApp({
 const bucket = getStorage().bucket();
 
 exports.handler = async event => {
-  console.log(app)
+  // console.log(app)
   console.log("====================================")
   console.log(event)
   console.log("====================================")
