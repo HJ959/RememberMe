@@ -1,22 +1,15 @@
-import { initializeApp } from 'firebase-admin/app'
-import { getAuth } from 'firebase-admin/auth'
-import * as firebaseStorage from "firebase-admin/storage"
+const { initializeApp, cert } = require('firebase-admin/app');
+const { getStorage } = require('firebase-admin/storage');
+const { getAuth } = require('firebase-admin/auth');
 
-const firebaseConfig = {
-  apiKey: process.env.DB_API_KEY,
-  authDomain: "forgetmenot-album-218fb.firebaseapp.com",
-  projectId: "forgetmenot-album-218fb",
-  storageBucket: "forgetmenot-album-218fb.appspot.com",
-  messagingSenderId: "245055722918",
-  appId: "1:245055722918:web:de55b620cf16fe4b516b67",
-  measurementId: "G-QBM1MXGE28"
-};
+const serviceAccount = JSON.parse(process.env.AUTH_JSON);
 
-// Initialize Firebase
-const app = initializeApp(firebaseConfig);
+initializeApp({
+  credential: cert(serviceAccount),
+  storageBucket: 'forgetmenot-album-218fb.appspot.com'
+});
 
-// Initialize Cloud Storage and get a reference to the service
-const storage = firebaseStorage.getStorage(app);
+const bucket = getStorage().bucket();
 
 exports.handler = async event => {
   console.log(app)
@@ -40,12 +33,12 @@ exports.handler = async event => {
   
   filename = filename.replaceAll(":", " ");
 
-  const storageRef = firebaseStorage.ref(storage, `${uid}/${filename}`);
+  const storageRef = bucket.ref(storage, `${uid}/${filename}`);
   console.log(storageRef)
   console.log("====================================")
 
   // Data URL string
-  await firebaseStorage.uploadString(storageRef, audioDataURL, 'data_url')
+  await bucket.uploadString(storageRef, audioDataURL, 'data_url')
 
   return {
     statusCode: 200,
