@@ -3,6 +3,8 @@ import './index.css'
 import { initializeApp } from 'firebase/app'
 import { getAuth, onAuthStateChanged, signInWithEmailAndPassword, signOut } from 'firebase/auth'
 import { getStorage, ref, uploadString } from 'firebase/storage'
+import { initializeAppCheck, ReCaptchaEnterpriseProvider } from "firebase/app-check"
+
 
 const firebaseApp = initializeApp({
   apiKey: "AIzaSyB0HHbyIG6lG_JkN-nzFXRoiHc0-ZtKnSo",
@@ -14,6 +16,11 @@ const firebaseApp = initializeApp({
   measurementId: "G-QBM1MXGE28"
 })
 
+const appCheck = initializeAppCheck(app, {
+  provider: new ReCaptchaEnterpriseProvider('6Lch2Q0pAAAAAC0OI5eZW8wlZg7JNJZgYSuht27Z'),
+  isTokenAutoRefreshEnabled: true // Set to true to allow auto-refresh.
+})
+
 // Initialize Cloud Storage and get a reference to the service
 const storage = getStorage(firebaseApp);
 const auth = getAuth(firebaseApp)
@@ -23,20 +30,11 @@ const loginButton = document.getElementById("login-form-submit");
 let user
 
 loginButton.addEventListener("click", (e) => {
-  e.preventDefault();
-  grecaptcha.enterprise.ready(async () => {
-    const token = await grecaptcha.enterprise.execute('6Lch2Q0pAAAAAC0OI5eZW8wlZg7JNJZgYSuht27Z', { action: 'LOGIN' });
-    console.log(token)
-  })
-
-  const email = loginForm.username.value;
-  const password = loginForm.password.value;
+  const email = loginForm.username.value
+  const password = loginForm.password.value
   signInWithEmailAndPassword(auth, email, password)
     .then((userCredential) => {
-      // Signed in 
-      user = userCredential.user;
-      console.log(user)
-      // ...
+      user = userCredential.user
     })
     .catch((error) => {
       const errorCode = error.code;
@@ -50,7 +48,7 @@ logoutButton.addEventListener("click", () => {
   signOut(auth).then(() => {
     // Sign-out successful.
   }).catch((error) => {
-    // An error happened.
+    console.log(`Sign out error: ${error}`)
   });
 })
 
@@ -91,58 +89,38 @@ scanButton.addEventListener("click", async () => {
       serialNumber
     }) => {
       serialNumberForFile = serialNumber
-      console.log(`> Serial Number: ${serialNumber}`);
+      console.log(`> Serial Number: ${serialNumber}`)
       output.innerHTML = `${serialNumber}`
-      console.log(`> Records: (${message.records.length})`);
+      console.log(`> Records: (${message.records.length})`)
     });
   } catch (error) {
     console.log("Argh! " + error);
   }
-});
+})
 
 const recorder = document.getElementById('recorder');
 const player = document.getElementById('player');
 let file, new_file, url;
 
 recorder.addEventListener('change', function (e) {
-  file = e.target.files[0];
-  url = URL.createObjectURL(file);
-  console.log(url)
+  file = e.target.files[0]
+  url = URL.createObjectURL(file)
   // Do something with the audio file.
-  player.src = url;
+  player.src = url
 });
 
 const uploadButton = document.getElementById('uploadButton');
-
 uploadButton.addEventListener("click", async () => {
   try {
     new_file = new File([file], `${serialNumberForFile}.m4a`);
-    console.log(new_file)
     var base64Audio = await audioToBase64(new_file)
-    console.log(base64Audio)
-    const storageRef = ref(storage, `${user.uid}/${serialNumberForFile}.m4a`);
+    const storageRef = ref(storage, `${user.uid}/${serialNumberForFile}.m4a`)
     await uploadString(storageRef, base64Audio, 'data_url')
-    //uploadFile(`${userIdToken}SPLITSTRING${serialNumberForFile}SPLITSTRING${base64Audio}`)
+    URL.revokeObjectURL(url) 
   } catch (error) {
     console.log("Argh! " + error);
   }
 })
-
-// async function uploadFile(fileToUpload) {
-//   const response = await fetch('https://forgetmenotbox.netlify.app/.netlify/functions/dbwrite', {
-//     method: "POST",
-//     body: fileToUpload
-//   })
-//   return await handleResponseUpload(response)
-// }
-
-function handleResponseUpload(response) {
-  if (response.status === 200) {
-    outputUpload.innerHTML = 'Success! File upload!'
-  } else {
-    outputUpload.innerHTML = `Failed with code: ${response}`
-  }
-}
 
 async function audioToBase64(audioFile) {
   return new Promise((resolve, reject) => {
