@@ -25,13 +25,14 @@ const appCheck = initializeAppCheck(firebaseApp, {
 const storage = getStorage(firebaseApp);
 const auth = getAuth(firebaseApp)
 
-const loginForm = document.getElementById("login-form");
-const loginButton = document.getElementById("login-form-submit");
+const loginForm = document.getElementById("username-field")
+const passwordForm = document.getElementById("password-field")
+const loginButton = document.getElementById("login-form-submit")
 let user
 
 loginButton.addEventListener("click", (e) => {
-  const email = loginForm.username.value
-  const password = loginForm.password.value
+  const email = loginForm.value
+  const password = passwordForm.value
   signInWithEmailAndPassword(auth, email, password)
     .then((userCredential) => {
       user = userCredential.user
@@ -40,7 +41,7 @@ loginButton.addEventListener("click", (e) => {
       const errorCode = error.code;
       const errorMessage = error.message;
       console.log(errorCode, errorMessage)
-    });
+    })
 })
 
 const logoutButton = document.getElementById('logoutButton')
