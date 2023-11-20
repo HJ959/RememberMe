@@ -111,15 +111,21 @@ recorder.addEventListener('change', function (e) {
 });
 
 const uploadButton = document.getElementById('uploadButton');
+const uploadOutput = document.getElementById('outputUpload');
 uploadButton.addEventListener("click", async () => {
   try {
     new_file = new File([file], `${serialNumberForFile}.m4a`);
     var base64Audio = await audioToBase64(new_file)
     const storageRef = ref(storage, `${user.uid}/${serialNumberForFile}.m4a`)
-    await uploadString(storageRef, base64Audio, 'data_url')
+    // await uploadString(storageRef, base64Audio, 'data_url')
+    uploadString(storageRef, base64Audio, 'data_url').then((snapshot) => {
+      console.log('Uploaded a data_url string!')
+      uploadOutput.innerHTML = 'Uploaded your recording! Please scan on Forget Me Not Box'
+    })
     URL.revokeObjectURL(url) 
   } catch (error) {
     console.log("Argh! " + error);
+    uploadOutput.innerHTML = "I'm sorry, something went wrong there. Please try again."
   }
 })
 
