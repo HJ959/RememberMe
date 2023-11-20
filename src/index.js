@@ -16,10 +16,10 @@ const firebaseApp = initializeApp({
   measurementId: "G-QBM1MXGE28"
 })
 
-// const appCheck = initializeAppCheck(firebaseApp, {
-//   provider: new ReCaptchaEnterpriseProvider('6Lch2Q0pAAAAAC0OI5eZW8wlZg7JNJZgYSuht27Z'),
-//   isTokenAutoRefreshEnabled: true // Set to true to allow auto-refresh.
-// })
+const appCheck = initializeAppCheck(firebaseApp, {
+  provider: new ReCaptchaEnterpriseProvider('6Lch2Q0pAAAAAC0OI5eZW8wlZg7JNJZgYSuht27Z'),
+  isTokenAutoRefreshEnabled: true // Set to true to allow auto-refresh.
+})
 
 // Initialize Cloud Storage and get a reference to the service
 const storage = getStorage(firebaseApp);
