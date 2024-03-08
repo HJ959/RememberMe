@@ -40,7 +40,10 @@ exports.handler = async event => {
       console.log(error)
     })
   
-  filename = filename.replaceAll(":", " ");
+  filename = filename.replaceAll(":", "");
+  console.log("====================================")
+  console.log("FILENAME IS:")
+  console.log(filename)
 
   const storageRef = firebaseStorage.ref(storage, `${uid}/${filename}`);
   console.log(storageRef)

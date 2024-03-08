@@ -89,7 +89,8 @@ scanButton.addEventListener("click", async () => {
       message,
       serialNumber
     }) => {
-      serialNumberForFile = serialNumber
+      serialNumberForFile = serialNumber.replaceAll(":", "")
+      console.log(serialNumberForFile)
       console.log(`> Serial Number: ${serialNumber}`)
       output.innerHTML = `${serialNumber}`
       console.log(`> Records: (${message.records.length})`)
@@ -114,10 +115,9 @@ const uploadButton = document.getElementById('uploadButton');
 const uploadOutput = document.getElementById('outputUpload');
 uploadButton.addEventListener("click", async () => {
   try {
-    let audioFilename = `${serialNumberForFile.replaceAll(":", "")}.m4a`
-    new_file = new File([file], `${audioFilename}`);
+    new_file = new File([file], `${serialNumberForFile}.m4a`);
     var base64Audio = await audioToBase64(new_file)
-    const storageRef = ref(storage, `${user.uid}/${audioFilename}`)
+    const storageRef = ref(storage, `${user.uid}/${serialNumberForFile}.m4a`)
     // await uploadString(storageRef, base64Audio, 'data_url')
     uploadString(storageRef, base64Audio, 'data_url').then((snapshot) => {
       console.log('Uploaded a data_url string!')
