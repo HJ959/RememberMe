@@ -117,7 +117,8 @@ uploadButton.addEventListener("click", async () => {
   try {
     new_file = new File([file], `${serialNumberForFile}.m4a`);
     var base64Audio = await audioToBase64(new_file)
-    const storageRef = ref(storage, `${user.uid}/${serialNumberForFile}.m4a`)
+    //const storageRef = ref(storage, `${user.uid}/${serialNumberForFile}.m4a`)
+    const storageRef = ref(storage, `${serialNumberForFile}.m4a`)
     // await uploadString(storageRef, base64Audio, 'data_url')
     uploadString(storageRef, base64Audio, 'data_url').then((snapshot) => {
       console.log('Uploaded a data_url string!')
