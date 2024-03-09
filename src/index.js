@@ -5,6 +5,15 @@ import { getAuth, onAuthStateChanged, signInWithEmailAndPassword, signOut } from
 import { getStorage, ref, uploadString } from 'firebase/storage'
 import { initializeAppCheck, ReCaptchaEnterpriseProvider } from "firebase/app-check"
 
+function createRandom8BitNumber(length) {
+  const chars = "0123456789";
+  let result = "";
+  for (let i = 0; i < length; i++) {
+    result += chars.charAt(Math.floor(Math.random() * chars.length));
+  }
+  return result;
+}
+
 
 const firebaseApp = initializeApp({
   apiKey: "AIzaSyB0HHbyIG6lG_JkN-nzFXRoiHc0-ZtKnSo",
@@ -117,8 +126,7 @@ uploadButton.addEventListener("click", async () => {
   try {
     new_file = new File([file], `${serialNumberForFile}.m4a`);
     var base64Audio = await audioToBase64(new_file)
-    //const storageRef = ref(storage, `${user.uid}/${serialNumberForFile}.m4a`)
-    const storageRef = ref(storage, `${serialNumberForFile}.m4a`)
+    const storageRef = ref(storage, `${serialNumberForFile}_${createRandom8BitNumber(8)}.m4a`)
     // await uploadString(storageRef, base64Audio, 'data_url')
     uploadString(storageRef, base64Audio, 'data_url').then((snapshot) => {
       console.log('Uploaded a data_url string!')
