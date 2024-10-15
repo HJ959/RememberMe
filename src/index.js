@@ -78,12 +78,17 @@ onAuthStateChanged(auth, (user) => {
 })
 
 const scanButton = document.getElementById('scanButton')
+const uploadButton = document.getElementById('uploadButton');
+const uploadOutput = document.getElementById('outputUpload');
 const output = document.getElementById('output')
 const outputUpload = document.getElementById('outputUpload')
+const audioSection = document.getElementById('audioSection')
+const uploadSection = document.getElementById('uploadSection')
 let serialNumberForFile, serialNumber
 
 scanButton.addEventListener("click", async () => {
   console.log("User clicked scan button")
+  audioSection.style.display = "block";
 
   try {
     const ndef = new NDEFReader();
@@ -127,10 +132,10 @@ recorder.addEventListener('change', function (e) {
   url = URL.createObjectURL(file)
   // Do something with the audio file.
   player.src = url
+  uploadSection.style.display = "block";
 });
 
-const uploadButton = document.getElementById('uploadButton');
-const uploadOutput = document.getElementById('outputUpload');
+
 uploadButton.addEventListener("click", async () => {
   try {
     new_file = new File([file], `${serialNumberForFile}.m4a`);

@@ -8,6 +8,7 @@
     <title>Document</title>
     <script src="https://www.google.com/recaptcha/enterprise.js?render=6Lch2Q0pAAAAAC0OI5eZW8wlZg7JNJZgYSuht27Z" async
         defer></script>
+        <link rel="stylesheet" href="https://use.typekit.net/bry0zpr.css">
 </head>
 
 <body>
@@ -16,7 +17,7 @@
         style="background-color:rgb(255, 255, 255); position:absolute; top:0px; left:0px; width:100%; height:100%; z-index:2000;">
     </div>
 
-    <div id="loginScreen">
+     <div id="loginScreen">
         <div class="container center">
             <img src="forgetmenot (1).png">
             <div class="center">
@@ -29,30 +30,34 @@
             </div>
             <div class="spacer"></div>
         </div>
-    </div>
+    </div> 
 
     <div id="webApp">
         <div class="container center">
             <img src="forgetmenot (1).png">
 
-            <button id="logoutButton">Logout</button>
-
-            <h3>Press scan and scan a NFC card</h3>
-            <button id="scanButton">Scan</button>
+            
+            <div class="spacer"></div>
+            <button id="scanButton">Scan Photo</button>
             <!-- <button id="makeReadOnlyButton">Make Read-Only</button>  -->
-
-            <h3>This is the NFC serial number</h3>
-            <div id="output" class="output">
+            
+            
+            <div id="audioSection">
+                <h3>Please select or record an audio clip</h3>
+                <input class="selectFile" type="file" accept="audio/*" id="recorder" />
+                <audio id="player" controls></audio>
+                
             </div>
+           
+            <div id="uploadSection">
 
-            <h3>Please select or record an audio clip</h3>
-            <input class="selectFile" type="file" accept="audio/*" id="recorder" />
-            <audio id="player" controls></audio>
-
-            <h3>Please upload the audio clip to the Forget Me Not Box</h3>
-            <button id="uploadButton">Upload</button>
-            <div id="outputUpload" class="output">
+                <!-- <h3>Please upload the audio clip to the Forget Me Not Box</h3> -->
+                <button id="uploadButton">Upload</button>
+                <div id="outputUpload" class="output">
+                </div>
             </div>
+           
+            <button id="logoutButton">Logout</button>
             <div class="spacer"></div>
         </div>
     </div>
